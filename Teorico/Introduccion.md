@@ -1,6 +1,4 @@
-# Ingenieria del Software
-
-## Capitulo 1: Introduccion
+# Capitulo 1: Introduccion
 
 * **Software**: Coleccion de programas, procedimientos, y la documentacion y datos asociados que determinan la operacion de un sistema de computacion.
 
