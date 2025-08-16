@@ -107,3 +107,23 @@ Unos de los desafios claves en Ingenieria del Software es asegurar que el exito 
 Las practicas de Ingenieria del Software deben preparar alsoftware para que este sea facilmente modificable. Los metodos que no permiten cambios, aun si producen alta calidad y productividad, son poco utiles.
 
 ### Enfoque de la Ingenieria del Software
+
+Como ya comprendemos el dominio del problema y los factores que motivan la Ingenieria de Software: Consistentemente desarrollar software de alta calidad y con alta productividad (*C&P*) para problemas de gran escala que se adapten a los cambios. **C&P** son los objetivos basicos a perseguir bajo gran escala y tolerencia a cambios. C&P son consecuencias de la gente, los procesos y la tegnologia.
+
+#### El Proceso de Desarrollo en Fases
+
+El proceso de **Desarrollo** consiste de varias fases, donde cada fase termina con una salida definida.
+<br> EL motivo por el cual se separa en fases es la **Separacion de Incumbencias**: Cada fase manipula distintos aspectos del desarrollo de software. El proceso en fases permite **Verificar la Calidad y Progreso** en momento definido del desarrollo, al final de la fase.
+<br> Se han propuesto varios modelos de procesos para el desarrollo de software, pero en general consiste de:
+
+1. **Analisis y Especificacion de Requerimientos**.
+2. **Arquitectura**.
+3. **Diseño**.
+4. **Codificacion**.
+5. **Testing**.
+6. **Entrega e Instalacion**.
+
+#### Administracion del proceso
+
+La administracion del proceso establece como asignar los recursos a las distintas tareas, como organizarlas termporalmente, como asegurar que cada fase se desarrollo apropiadamente, etc.
+<br> Estas cuestiones se manejan a traves de la administracion del proceso. Sin la administracion del proceso es virtualmente imposible cumplir con los objetivos de C&P.
