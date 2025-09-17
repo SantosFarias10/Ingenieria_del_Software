@@ -143,3 +143,70 @@ Al terminar la etapa de especificacion la salida es la SRS, que es construida a 
 Debido a la misma naturaleza de esta etapa, hay muchas posibilidades de malentendidos. Mientras mas se avanza en el desarrollo mas caro es corregir y encontrar dichos errores, por lo cual arreglarlos en esta etapa es crucial.
 <br>La SRS se revisa por un grupo de personas conformado por: **Autor**, **Cliente**, **Representantes de Usuarios** y de **Desarrolladores**, donde deben estar los clientes y usuarios. Existen herramientas para el modelado y análisis de especificaciones.
 
+## Punto Funcion
+
+Estimador similar a la metrica LOC que se determina solo con la SRS definiendo el tamaño en terminos de "Funcionalidad". 
+<br>Tipo de Funciones:
+* **Entrada Externas**
+  * Tipo de entrada (dato/control) externa a la aplicacion.
+* **Salida Externa**
+  * Tipo de salida que deja el sistema.
+* **Archivos Logicos Externos**
+  * Grupo logico de dato/control de informacion generado/usado/manipulado.
+* **Archivos de Interfaz Externa**
+  * Archivos pesados/compartidos entre aplicaciones.
+* **Transacciones Externas**
+  * Input/output inmediatos (*queris*).
+
+Cada tipo de funciones se diferencia segun sea **Complejo**, **Promedio** o **Simple**.
+
+**Punto de Funcion NO Ajustado** (**UFP**)
+$$\sum_{i=1}^{5} \sum_{j=1}^{3} W_{ij}C_{ij}$$
+Donde $C_{ij}$ representa la cantidad de funciones de tipo `i` con complejidad `j`. $W_{ij}$ es el peso.
+
+Luego debemos ajustar UFP de acuerdo a la complejidad del entorno. Se evalúa según las siguientes características:
+1. Comunicación de datos
+2. Procesamiento distribuido
+3. Objetivos de desempeño
+4. Carga en la configuración de operación
+5. Tasa de transacción
+6. Ingreso de datos online
+7. Eficiencia del usuario final
+8. Actualización online
+9. Complejidad del procesamiento lógico
+10. Reusabilidad
+11. Facilidad para la instalación
+12. Facilidad para la operación
+13. Múltiples sitios
+14. Intención de facilitar cambios
+
+El **Factor de Ajuste de Complejidad** (**CAF**) se calcula como:
+$$0.65 + 0.01 * \sum_{i=1}^{14} P_i$$
+Y los **Puntos Función** = $CAF * UFP$
+
+## Arquitectura del Software
+
+La Arquitectura del Software de un sistema es la estructura del sistema que comprende los elementos del software, las **Propiedades Externas Visibles** de tales elementos, y la relacion entre ellas. La arquitectura es el diseño del mas alto nivel, donde se hacen las elecciones de tecnología, productos a utilizar, servidores, etc. Divide al sistema en partes lógicas tal que cada una puede ser **Comprendida Independientemente**, describiendo también la relación entre ellas.
+
+La Arquitectura del Software ayuda a:
+* **Comprension y Comunicacion**:
+  * Al mostrar la estructura de alto nivel del sistema ocultando su complejidad, facilita la **Comunicación** definiendo un marco de **Comprensión** común entre los interesados siendo de mucha ayuda para las negociaciones, acuerdos y comprensión del sistema existente.
+* **Reuso**: 
+  * Una forma de **reúso** es componer el sistema con partes existentes, lo cual se facilita si a un alto nivel se reúsan componentes que proveen un servicio completo. Por lo cual se elige una arquitectura tal que las componentes existentes encajen adecuadamente con otras componentes a desarrollar. Estas decisiones sobre el uso de componente se toman en el momento de diseñar la arquitectura.
+* **Construccion y Evolucion**: 
+  * La división provista por la arquitectura servirá para guiar el desarrollo del sistema. Ayuda a asignar equipos de trabajos a diferentes partes independientes, además de facilitar la elección de cuáles partes necesitas cambiarse durante la **Evolución** del software contribuyendo a decidir cuál es el impacto de dichos cambios.
+* **Analisis**:
+  * Es deseable que propiedades de **Confiabilidad** y **Desempeño** puedan determinarse en el diseño de alto nivel, permitiendo considerar distintas alternativas de diseño hasta encontrar los niveles de satisfacción deseados. Lo cual requerirá descripción precisa de la arquitectura así como de las propiedades de las componentes.
+
+### La Vista de Componentes y Conectores
+
+Tiene 2 elementos principales, los **Componentes** y los **Conectores**. Esta **Vista** describe qué componentes existen y como interactúan entre ellos en **Tiempo de Ejecución**. Prácticamente es un grafo donde los **componentes son nodos** y los **conectores aristas**.
+* **Componentes**: Son unidades de cómputo o de almacenamiento de datos, cada componente tiene un nombre y tipo.
+* **Conectores**: Describen el medio en el cual la interacción entre componentes toma lugar. Estos tienen nombre y tipo. Muchas veces estos conectores representan protocolos.
+
+### Estilos Arquitectonicos
+
+Sistemas distintos tienen estructuras CyC (Componentes y conectores) distintas, algunas estructuras son generales y son útiles para una clase de problemas, estos son llamados **Estilos Arquitectónicos**. Un **Estilo Arquitectónico** define una familia de arquitecturas que satisface restricciones de ese estilo. Distintos estilos pueden fusionarse para generar una nueva arquitectura
+
+* ### Tubos y Filtros (*Pipe and Filter*)
+
