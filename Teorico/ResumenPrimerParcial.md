@@ -210,3 +210,226 @@ Sistemas distintos tienen estructuras CyC (Componentes y conectores) distintas, 
 
 * ### Tubos y Filtros (*Pipe and Filter*)
 
+Adecuado para sistemas que fundamentalmente realizan **Transformaciones de Datos**. Un sistema que utiliza este estilo usa una red de transformadores para realizar el resultado deseado. Esta compuesto por un solo tipo de componente (**filtro**) y un solo tipo de conector (**tubo**). Un filtro realiza transformaciones y le pasa los datos a otro filtro por un tubo 
+<br>Restricciones:
+
+* Un filtro es una entidad independiente y asincrónica.
+* Un filtro no necesita saber la identidad de los filtros que envían o reciben datos.
+* Un tubo es un canal de redirección unidireccional que transporta un flujo de un filtro a otro.
+* Un tubo sólo conecta 2 componentes.
+* Lo filtros deben hacer "buffering" y sincronización para asegurar el correcto funcionamiento como productor y consumidor.
+* Cada filtro debe trabajar sin conocer la identidad de los filtros productores o consumidores.
+* Un tubo debe conectar un puerto de salida de un filtro a un puerto de entrada de otro filtro.
+* Un sistema puro de tubos y filtros usualmente requiere que cada filtro tenga su propio hilo de control.
+
+* ### Estilo de Datos Compartido
+
+Hay 2 tipos de componentes, el **Repositorio de Datos** y **Usuario de Datos**. El primero provee almacenamiento permanente confiable, mientras que los usuarios acceden a los datos en el repositorio, realizan cálculos y luego ponen esos datos en el repositorio. De esta forma solo hay 1 tipo de conector de lectura/escritura. Tiene 2 variantes, el estilo pizarra donde cuando hay un cambio en el repositorio se les notifica a todos los usuarios de dicho repositorio, y el estilo repositorio donde el repositorio es pasivo.
+
+* ### Estilo Cliente-Servidor
+
+Hay 2 tipos de componentes, los **Clientes** y los **Servidores**, donde los primeros solo se comunican con el servidor de forma asincrónica, ya que también son los clientes quienes deben iniciar dicha comunicación. El único tipo de conector que hay es *request/reply*. Normalmente este estilo tiene una estructura multi-nivel.
+
+## ATAM
+
+ATAM (*Architecture Tradeoff Analysis Method*)
+
+El ATAM evalúa las consecuencias de las decisiones arquitectónicas en relación a los atributos de calidad. <br>Sus principales pasos son:
+
+1. **Recolectar Escenarios**.
+   * Los escenarios describen interacciones del sistema.
+   * Elegir los escenarios de interés para el análisis.
+   * Incluir escenario excepcionales sólo si son importantes.
+2. **Recolectar Requerimientos y/o Restricciones**
+   * Definir lo que se espera del sistema en tales escenarios.
+   * Deben especificar los niveles deseados para los atributos de interés.
+3. **Describir las Vistas Arquitectónicas**
+   * Las vistas del sistema que serán evaluadas son recolectadas.
+   * Distintas vistas pueden ser necesarias para distintos análisis.
+4. **Análisis Especifico a Cada Atributo**
+   * Se analizan vistas bajo distintos escenarios separadamente para cada atributo de interés distinto.
+   * Esto para comparar los niveles deseados con los obtenidos con cada atributo.
+5. **Identificar Puntos Sensitivos y de Compromisos**
+   * **Análisis de Sensibilidad**: Ver el impacto de un elemento sobre un atributo de calidad, los que mas afectan los atributos son los puntos de sensibilidad.
+   * **Análisis de Compromiso**: Los puntos de compromiso son los elementos que son puntos de sensibilidad para varios atributos.
+
+## Modelo de Proceso de Desarrollo
+
+Un **Modelo de Proceso** especifica un proceso general, usualmente como un conjunto de etapas adecuado para una clase de proyectos, es decir, provee una estructura genérica de los procesos que pueden seguirse en algunos proyectos con el fin de alcanzar sus objetivos.
+
+### Cascada
+
+Tiene 6 faces:
+1. Análisis de requerimientos.
+2. Diseño de alto nivel.
+3. Diseño detallado.
+4. Codificación.
+5. Testing.
+6. Instalación.
+
+Una fase comienza sólo cuando la anterior finaliza, en principio no hay feedback con el cliente ni con otras fases (existe el modelo de cascada con feedback, pero este solo permite el feedback a fases con distancia de uno, es decir, solo con la fase anterior). Normalmente se hace un testing de cada fase antes de pasar a la siguiente para ver que todo ande bien.
+
+Ventajas:
+* Conceptualmente simple.
+* Intuitivo y lógico.
+* Fácil de administrar y ejecutar en un contexto contractual.
+* Muy adecuado para proyectos donde los requerimiento son bien comprendidos y las decisiones sobre tecnología son tempranas.
+* Es adecuado para proyectos donde los desarrolladores están muy familiarizados con el problema a solucionar y el proceso a seguir.
+* Proyectos de corta duración.
+* Automatización de procesos manuales existentes.
+
+Desventajas:
+* Todo o nada: muy riesgoso.
+* Los requisitos se congelan muy temprano (no hay feedback con cliente).
+* Puede escoger hardware de tecnologías viejas.
+* No permite cambios.
+* No hay Feedback con el usuario.
+
+### Prototipo
+
+El prototipo intenta abordar las debilidades de cascada en la especificación de los requerimientos de forma que en vez de construir los requerimiento sólo basado en charlas y debates, se construye un prototipo que permita comprender los requerimientos. Así el cliente tiene mas idea de lo que sería el Software obteniendo mejor feedback de él disminuyendo los riesgos de requerimientos. La etapa de análisis de requerimientos es remplazada por una "mini cascada". El prototipo debe descartarse.
+* Construir sólo aspectos que se necesiten aclarar.
+* "**Quick and Dirty**": no importa la calidad.
+* Omitir manejo de excepciones.
+* Reducir testing.
+
+Ventajas:
+* Mayor estabilidad en los requerimientos.
+* Los requerimientos se congelan mas tarde.
+* La experiencia en la construcción del prototipo ayuda al desarrollo principal.
+* Sistemas finales mejores y más estables.
+
+Desventajas:
+* Potencial impacto en costo y tiempo.
+* No permite cambios tardíos.
+* Comienzo pesado.
+
+Aplicacion:
+* Cuando los requerimientos son difíciles de determinar y la confianza en ellos es baja.
+* Sistemas con usuarios novatos.
+* Cuando las interfaces con el usuario no son muy importantes.
+
+### Iterativo
+
+Logra abordar el problema del "todo o nada" del modelo de cascada combinando beneficios del Prototipado y del Cascada desarrollando el software incrementalmente, donde cada incremento es completo en si mismo testeando luego de cada uno. Puede verse como una secuencia de cascadas. El feedback de una iteración se puede usar en iteraciones futuras
+<br> Primero se crea la **Lista de Control del Proyecto**(**LCP**) la cual contiene en orden las tareas que se deben realizar para lograr la implementación final. Cada iteración consiste en eliminar la siguiente tarea de la lista haciendo diseño, implementación y análisis del sistema parcial y actualizar la LCP, repitiendo este proceso hasta vaciar la lista.
+
+Ventajas:
+* Pagos y entregas incrementales.
+* Feedback para mejorar desarrollo entre iteraciones.
+* Entregas regulares y rápidas.
+* Reduce riesgo.
+* Prioriza requisitos y acepta cambios.
+
+Desventajas:
+* La Arquitectura y el diseño se ven perjudicados.
+* La revisión del trabajo hecho puede incrementarse.
+* El costo total suele ser mayor.
+* Sobrecarga de planeamiento en cada iteración.
+* El trabajo de una iteración puede deshacerse en otra.
+
+Aplicaciones:
+* Cuando el tiempo de respuesta es importante.
+* Cuando no se puede tomar el riesgo de proyectos largos.
+* Cuando no se conocen todos los requerimientos.
+
+### Timeboxing
+
+Timeboxing primero fija la duración de las iteraciones y luego determina la especificación, dividiendo la iteración en partes iguales usando *pipelining* para ejecutar iteraciones en paralelo
+<br>El desarrollo se realiza iterativamente en "cajas temporizadas" de igual duración, cada una de estas se divide en etapas de duración fijas desarrollando una tarea bien definida independiente a las demás. Hay un equipo en cada etapa. El cronograma tiene un alto compromiso con este modelo.
+
+Ventajas:
+* Todas las del iterativo.
+* Menor tiempo de entrega.
+* Ejecución del proyecto distribuida.
+* Planeamiento y negociación un poco más fácil.
+
+Desventajas:
+* Grandes equipos de trabajo.
+* Administración de proyecto mucho mas compleja.
+* Se necesita mucha sincronización.
+* Es posible el incremento de los costos.
+
+Aplicacion:
+* Cuando los tiempos de entrega son muy importantes.
+* Hay flexibilidad en agrupar características.
+
+## Diseño
+
+### Criterio para Evaluar el Diseño
+
+Existen 3 criterios para evaluar el diseño:
+* **Correccion**
+  * Es fundamental y busca que el diseño sea factible dadas las restricciones y que este implemente todos los requerimientos.
+* **Eficiencia**
+  * Le compete el uso apropiado de los recursos del sistema. Debido al abaratamiento del hardware no es tan importante como los demás salvo en sistemas muy específicos como sistemas integrados o de tiempo real.
+* **Simplicidad**
+  * Tiene impacto directo en el mantenimiento, el cual recordemos que es caro. Un diseño simple facilita la comprensión del sistema lo cual hace que el software sea mantenible. Facilita el testing, el descubrimiento y corrección de bugs y la modificación del código.
+
+### Principios Fundamentales del Diseño
+
+Existen Principios fundamentales los cuales nos guían en el proceso del diseño:
+* **Partición y jerarquía**
+  * Se basa en "divide y conquistarás", trata de dividir el problema en pequeñas partes manejables, donde cada una de estas debe poder solucionarse y modificarse separadamente del resto.
+* **Abstraccion**
+  * La abstracción de un componente describe el comportamiento externo sin dar detalles de cómo se produce dicho comportamiento, representando a los componentes como cajas negras; lo cual es muy útil para comprender el sistema existente, para el mantenimiento y para determinar el diseño del sistema existente.
+* **Modularidad**
+  * Un sistema se dice modular si consiste de componentes discretas tal que puedan implementarse separadamente un cambio a una de ellas tenga un mínimo impacto sobre las otras.
+
+### Top-Down y Bottom-Up
+
+* **Top-Down**
+  * El diseño comienza con la especificación del sistema.
+  * Define el módulo que implementará la especificación.
+  * Especifica los módulos subordinados.
+  * Luego, iterativamente, trata cada uno de estos módulos especificados cómo el nuevo problema.
+  * El refinamiento procede hasta alcanzar un nivel donde el diseño pueda ser implementado directamente
+  * **Ventajas**:
+    * En cada paso existe una clara imagen del diseño.
+    * Enfoque más natural para manipular problemas complejos.
+    * La mayoría de las metodologías de diseño se basan en este enfoque
+  * **Desventajas**:
+    * La factibilidad es desconocida hasta el final.
+
+* **Bottom-Up**:
+  * empieza por las componentes básicas de un sistema y prcede a armar cómo las componentes más altas de este las implementan.
+  * Cuando dicho sistema se puede/tiene que armar a partir de uno ya existente, del cual se van a utilizar componentes ya armadas.
+  * Para poder aplicar bottom-up, se necesita saber a qué sistema de alto nivel se quiere llegar.
+
+### Cohesion y Acoplamiento.
+
+Dos módulos son independientes si cada uno puede funcionar completamente sin la presencia del otro. Esto es deseable ya que ayuda a modificar los módulos y testearlos separadamente. Pero en un sistema no existe la noción de dependencia entre todos los módulos, estos deben cooperar entre si. Mientras mas conexiones hay entre dos módulos, mas dependientes son uno del otro.
+
+**Acoplamiento**: El acoplamiento es un concepto inter-modular que captura esta noción de dependencia. Nuestro objetivo seria tener el menor acoplamiento posible. Siempre que se pueda, tener módulos independientes, ya que este acoplamiento no puede reducirse durante la implementación.
+<br>Para tener un bajo acoplamiento se necesitaría que las interfaces sólo contengan información de datos. Mientras que las interfaces que contienen comunicación de información hibrida (datos+ control) tienen mas acoplamiento.
+
+Para mantener esa debilidad y evitar el aumento de acoplamiento, se buscan 3 aspectos en las interfaces de los módulos:
+* Minimizar la cantidad en cada uno.
+* Pasar parámetros "sencillos".
+  * Por ejemplo, no hace falta pasar un objeto entero si solo se quiere modificar uno de sus atributos.
+* Pasar parámetros de datos, no de control (Por ejemplo, que no sean variables que se vayan a usar como condición) y, mucho menos, ambos.
+
+**Cohesión**: La cohesión considera caracteriza el vínculo intra-modular. Con esta intentamos capturar cuan cercanamente están relacionados los elementos de un modulo entre sí. Buscamos menor acoplamiento y mayor cohesión.
+
+Niveles de cohesión:
+* **Casual**: La relación entre los elementos del módulo no tiene significado per se.
+* **Lógico**: Existe alguna relación lógica entre los elementos del módulo. Los elementos realizan acciones dentro de la misma clase lógica.
+* **Temporal**: Parecido a cohesión lógica pero los elementos están relacionados en el tiempo y se ejecutan juntos.
+* **Procedural**: Contiene elementos que pertenecen a una misma unidad procedural.
+* **Comunicacional**: Tiene elementos que están relacionados por una referencia al mismo dato, es decir que están juntos porque operan al mismo dato.
+* **Secuencial**: Los elementos están juntos porque la salida de uno corresponde a la entrada del otro.
+* **Funcional**: Es la mas fuerte de todas las cohesiones, donde todos los elementos del módulo están relacionados para llevar a cabo una función.
+
+### Diagrama de Estructura
+
+Todo programa tiene estructura, para ello se utiliza el: **Diagrama de Estructura**, el cual presenta una notación gráfica para tal estructura estática del software. Representa módulos y sus interconexiones. Además la invocación de un modulo A a B se representa con una flecha etiquetada con los ítems que se pasan y hacia que lado.
+
+Hay varios tipos de módulos:
+* **Módulo de entrada**: Simplemente salen datos desde este módulo hacia el módulo invocador.
+* **Módulo de salida**: Simplemente entran datos desde el módulo invocador.
+* **Módulo transformador**: Transforma datos enviados por el módulo invocador.
+* **Módulo coordinador**: Coordina datos entre módulos invocadores.
+* **Módulo compuesto**: Hace todo junto.
+
+### Metodologia de Diseño Estructurado
+
