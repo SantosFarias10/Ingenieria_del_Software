@@ -1,0 +1,640 @@
+/* === Estilo de juego de cartas - Mesa verde casino === */
+
+/* Contenedor principal con fondo verde casino */
+.game-container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: #2d7e52;
+}
+
+/* === Área central de mazos === */
+.central-area {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+}
+
+.decks-container {
+  display: flex;
+  gap: 3rem;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Ajustes para los componentes de mazo existentes */
+.mazo-regular-wrapper,
+.mazo-descarte-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.mazo-regular,
+.mazo-descarte {
+  position: relative;
+  transition: transform 0.2s ease;
+}
+
+.mazo-regular.activo:hover {
+  transform: translateY(-8px);
+  cursor: pointer;
+}
+
+.contador-cartas,
+.contador-descarte {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background: rgba(218, 165, 32, 0.95);
+  color: #1a1a1a;
+  font-weight: bold;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.label-mazo {
+  color: #f5f5dc;
+  font-weight: 600;
+  font-size: 0.875rem;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+  margin: 0;
+}
+
+.descarte-vacio {
+  width: 100px;
+  height: 140px;
+  border: 2px dashed rgba(255, 255, 255, 0.3);
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.descarte-vacio p {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.75rem;
+  text-align: center;
+}
+
+/* === Boton de Terminar Turno === */
+.endturn {
+  position: absolute;
+  bottom: 5px;
+  left: 38%;
+  transform: translateX(-50%);
+  background: rgba(218, 165, 32, 0.95);
+  color: #1a1a1a;
+  font-weight: bold;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  z-index: 50;
+  min-width: 180px;
+  text-align: center;
+}
+
+.endturn:hover:not(:disabled) {
+  background: rgba(218, 165, 32, 1);
+  transform: translateX(-50%) translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+}
+
+.endturn:disabled {
+  background: rgba(128, 128, 128, 0.5);
+  color: rgba(255, 255, 255, 0.5);
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* === Botón de No ejecutar acción === */
+.no-ejecutar-accion {
+  position: absolute;
+  bottom: 5px;
+  left: 77%;
+  transform: translateX(-50%);
+  background: rgba(205, 28, 24, 0.85);
+  color: #ffffff;
+  font-weight: bold;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  z-index: 50;
+  min-width: 150px;
+  text-align: center;
+}
+
+.no-ejecutar-accion:hover:not(:disabled) {
+  background: rgba(205, 28, 24, 1);
+  transform: translateX(-50%) translateY(-2px);
+  box-shadow: 0 6px 16px rgba(205, 28, 24, 0.4);
+}
+
+.no-ejecutar-accion:disabled {
+  background: rgba(128, 128, 128, 0.5);
+  color: rgba(255, 255, 255, 0.5);
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* === Botones de Bajar Set === */
+.bajar-set {
+  position: absolute;
+  bottom: 5px;
+  right: 20px;
+  background: rgba(76, 175, 80, 0.9);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(8px);
+  z-index: 1000;
+}
+
+.bajar-set:hover:not(:disabled) {
+  background: rgba(76, 175, 80, 1);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+}
+
+.bajar-set:disabled {
+  background: rgba(128, 128, 128, 0.5);
+  color: rgba(255, 255, 255, 0.5);
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* === Jugadores === */
+
+/* Contenedor de info del jugador (avatar + nombre juntos) */
+.player-info-area {
+  position: absolute;
+  z-index: 3;  /* Por encima de las manos (z-index: 2) */
+  pointer-events: none;
+}
+
+.player-info-area:has(.player-info.selectable) {
+  pointer-events: auto;
+}
+
+.player-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(8px);
+  padding: 0.75rem;
+  border-radius: 1rem;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  transition: all 0.3s ease;
+}
+
+.player-info.active {
+  background: rgba(218, 165, 32, 0.25);
+  border-color: rgba(218, 165, 32, 0.8);
+  box-shadow: 0 0 20px rgba(218, 165, 32, 0.4), 0 4px 12px rgba(0, 0, 0, 0.5);
+  z-index: 10;  /* El jugador activo está aún más arriba */
+}
+
+.player-info.selectable {
+  pointer-events: auto;
+  background: rgba(76, 175, 80, 0.25);
+  border-color: rgba(76, 175, 80, 0.9);
+  box-shadow: 0 0 20px rgba(76, 175, 80, 0.6), 0 4px 12px rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.player-info.selectable:hover {
+  background: rgba(76, 175, 80, 0.4);
+  border-color: rgba(76, 175, 80, 1);
+  box-shadow: 0 0 30px rgba(76, 175, 80, 0.8), 0 4px 16px rgba(0, 0, 0, 0.6);
+  transform: scale(1.05);
+}
+
+/* Avatar del jugador */
+.player-info .player-avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  border: 3px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+}
+
+.player-info.active .player-avatar {
+  border-color: rgba(218, 165, 32, 0.9);
+  box-shadow: 0 0 12px rgba(218, 165, 32, 0.5);
+}
+
+.player-info.selectable .player-avatar {
+  border-color: rgba(76, 175, 80, 0.9);
+  box-shadow: 0 0 15px rgba(76, 175, 80, 0.6);
+}
+
+.player-info.selectable:hover .player-avatar {
+  border-color: rgba(76, 175, 80, 1);
+  box-shadow: 0 0 25px rgba(76, 175, 80, 0.8);
+}
+
+.player-info .player-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Nombre del jugador */
+.player-info .player-name {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.player-info .player-name > span:first-child {
+  color: #f5f5dc;
+  font-weight: 600;
+  font-size: 0.875rem;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+  white-space: nowrap;
+}
+
+.player-info .active-indicator {
+  background: rgba(218, 165, 32, 0.95);
+  color: #1a1a1a;
+  font-size: 0.625rem;
+  padding: 0.125rem 0.5rem;
+  border-radius: 0.5rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* === Manos de jugadores === */
+.player-hand-area {
+  position: absolute;
+  z-index: 2;
+}
+
+.hand-fan {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 280px;  /* Reducido de 320px */
+  height: 120px; /* Reducido de 140px */
+}
+
+/* Sobrescribir estilos de ManoJugador para integrarlo al layout circular */
+.game-container .mano-jugador {
+  position: relative;
+  bottom: auto;
+  left: auto;
+  transform: none;
+  background: transparent;
+  padding: 0;
+  border: none;
+  box-shadow: none;
+  z-index: auto;
+  animation: none;
+  width: 100%;
+}
+
+/* Ajuste para mano del jugador actual */
+.hand-fan .mano-jugador {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.hand-fan .mano-jugador > p {
+  display: none; /* Ocultar contador de cartas */
+}
+
+.hand-fan .cartas-container {
+  position: relative;
+  width: 100%;
+  height: 120px;  /* Reducido de 140px */
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+/* Sobrescribir posicionamiento de cartas en ManoJugador */
+.game-container .cartas-container > * {
+  position: absolute !important;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+/* Distribuir cartas en abanico */
+.game-container .cartas-container > *:nth-child(1) {
+  left: 0% !important;
+  transform: rotate(-15deg) translateY(15px) !important;
+  z-index: 1;
+}
+
+.game-container .cartas-container > *:nth-child(2) {
+  left: 17% !important;
+  transform: rotate(-9deg) translateY(8px) !important;
+  z-index: 2;
+}
+
+.game-container .cartas-container > *:nth-child(3) {
+  left: 34% !important;
+  transform: rotate(-3deg) translateY(3px) !important;
+  z-index: 3;
+}
+
+.game-container .cartas-container > *:nth-child(4) {
+  left: 51% !important;
+  transform: rotate(3deg) translateY(3px) !important;
+  z-index: 4;
+}
+
+.game-container .cartas-container > *:nth-child(5) {
+  left: 68% !important;
+  transform: rotate(9deg) translateY(8px) !important;
+  z-index: 5;
+}
+
+.game-container .cartas-container > *:nth-child(6) {
+  left: 85% !important;
+  transform: rotate(15deg) translateY(15px) !important;
+  z-index: 6;
+}
+
+.game-container .cartas-container > *:hover {
+  transform: translateY(-20px) scale(1.1) rotate(0deg) !important;
+  z-index: 100 !important;
+  cursor: pointer;
+}
+
+/* === Mano de oponentes (cartas boca abajo) === */
+.opponent-hand {
+  pointer-events: none;
+}
+
+.opponent-cards {
+  position: relative;
+  width: 100%;
+  height: 120px;  /* Reducido de 140px */
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.opponent-card {
+  position: absolute;
+  transition: all 0.2s ease;
+}
+
+/* Distribuir cartas de oponentes en abanico similar */
+.opponent-card:nth-child(1) {
+  left: 0%;
+  transform: rotate(-15deg) translateY(15px);
+  z-index: 1;
+}
+
+.opponent-card:nth-child(2) {
+  left: 17%;
+  transform: rotate(-9deg) translateY(8px);
+  z-index: 2;
+}
+
+.opponent-card:nth-child(3) {
+  left: 34%;
+  transform: rotate(-3deg) translateY(3px);
+  z-index: 3;
+}
+
+.opponent-card:nth-child(4) {
+  left: 51%;
+  transform: rotate(3deg) translateY(3px);
+  z-index: 4;
+}
+
+.opponent-card:nth-child(5) {
+  left: 68%;
+  transform: rotate(9deg) translateY(8px);
+  z-index: 5;
+}
+
+.opponent-card:nth-child(6) {
+  left: 85%;
+  transform: rotate(15deg) translateY(15px);
+  z-index: 6;
+}
+
+.opponent-card .carta {
+  width: 50px;   /* Reducido de 60px */
+  height: 70px;  /* Reducido de 84px */
+}
+
+.opponent-card .carta .imagen-carta {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0.375rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* === Responsive === */
+@media (max-width: 1024px) {
+  .hand-fan,
+  .opponent-hand {
+    width: 280px;
+    height: 120px;
+  }
+
+  .decks-container {
+    gap: 2rem;
+  }
+
+  .endturn {
+    bottom: 15px;
+    padding: 0.625rem 1.25rem;
+    font-size: 0.9375rem;
+    min-width: 160px;
+  }
+
+  .no-ejecutar-accion {
+    bottom: 15px;
+    padding: 0.625rem 1.25rem;
+    font-size: 0.9375rem;
+    min-width: 140px;
+  }
+
+  .bajar-set {
+    bottom: 15px;
+    right: 15px;
+    padding: 0.625rem 1.25rem;
+    font-size: 0.9375rem;
+    min-width: 120px;
+  }
+
+}
+
+@media (max-width: 768px) {
+  .hand-fan,
+  .opponent-hand {
+    width: 240px;
+    height: 100px;
+  }
+
+  .decks-container {
+    gap: 1.5rem;
+    transform: scale(0.85);
+  }
+
+  .player-badge {
+    padding: 0.375rem 0.75rem;
+    font-size: 0.75rem;
+  }
+
+  .endturn {
+    bottom: 10px;
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    min-width: 140px;
+    z-index: 100;
+  }
+
+  .no-ejecutar-accion {
+    bottom: 10px;
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    min-width: 120px;
+    z-index: 100;
+  }
+
+  .bajar-set {
+    bottom: 10px;
+    right: 10px;
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    min-width: 100px;
+  }
+
+}
+
+@media (max-width: 480px) {
+  .endturn {
+    bottom: 8px;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.8125rem;
+    min-width: 120px;
+  }
+
+  .no-ejecutar-accion {
+    bottom: 8px;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.8125rem;
+    min-width: 110px;
+  }
+
+  .bajar-set {
+    bottom: 8px;
+    right: 8px;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.8125rem;
+    min-width: 90px;
+  }
+
+}
+
+/* === Estado de Desgracia Social === */
+
+/* Jugador en desgracia - borde rojo y efecto de advertencia */
+.player-info.desgraciado {
+  background: rgba(231, 76, 60, 0.15);
+  border: 2px solid rgba(231, 76, 60, 0.8);
+  box-shadow: 0 0 20px rgba(231, 76, 60, 0.4), 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+.player-info.desgraciado.active {
+  background: rgba(231, 76, 60, 0.25);
+  border-color: rgba(231, 76, 60, 1);
+  box-shadow: 0 0 25px rgba(231, 76, 60, 0.6), 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+/* Badge de advertencia en el avatar */
+.player-avatar .desgracia-badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: rgba(231, 76, 60, 0.95);
+  color: white;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  border: 2px solid rgba(255, 255, 255, 0.9);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  z-index: 5;
+  animation: pulse-warning 2s infinite;
+}
+
+@keyframes pulse-warning {
+  0%, 100% {
+    box-shadow: 0 0 8px rgba(231, 76, 60, 0.6);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(231, 76, 60, 0.9);
+  }
+}
+
+/* Indicador de texto "En Desgracia" */
+.desgracia-indicator {
+  display: block;
+  color: #e74c3c;
+  font-weight: bold;
+  font-size: 0.75rem;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+  margin-top: 2px;
+  padding: 2px 6px;
+  background: rgba(231, 76, 60, 0.2);
+  border-radius: 4px;
+}
+
+/* Avatar del jugador en desgracia */
+.player-info.desgraciado .player-avatar {
+  border-color: rgba(231, 76, 60, 0.9);
+  box-shadow: 0 0 12px rgba(231, 76, 60, 0.5);
+  position: relative;
+}
+
+.player-info.desgraciado.active .player-avatar {
+  border-color: rgba(231, 76, 60, 1);
+  box-shadow: 0 0 20px rgba(231, 76, 60, 0.7);
+}

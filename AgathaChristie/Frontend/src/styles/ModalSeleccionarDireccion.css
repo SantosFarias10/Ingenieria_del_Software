@@ -1,0 +1,119 @@
+.modal-direccion-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+
+.modal-direccion-panel {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  border: 2px solid #d4af37;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  padding: 24px;
+  max-width: 500px;
+  width: 90%;
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.modal-direccion-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  border-bottom: 1px solid #d4af37;
+  padding-bottom: 12px;
+}
+
+.modal-direccion-title {
+  margin: 0;
+  color: #d4af37;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  flex: 1;
+}
+
+.modal-direccion-close {
+  background: none;
+  border: none;
+  color: #d4af37;
+  font-size: 28px;
+  cursor: pointer;
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.modal-direccion-close:hover {
+  background-color: rgba(212, 175, 55, 0.1);
+}
+
+.modal-direccion-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.direccion-buttons {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+}
+
+.btn-direccion {
+  flex: 1;
+  padding: 16px;
+  border: 2px solid #d4af37;
+  background: linear-gradient(135deg, #0f3460 0%, #16213e 100%);
+  color: #d4af37;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.btn-direccion:hover {
+  background: linear-gradient(135deg, #16213e 0%, #0f3460 100%);
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+  transform: translateY(-2px);
+}
+
+.btn-direccion:active {
+  transform: translateY(0);
+}
+
+.flecha {
+  font-size: 24px;
+}
+
+.texto {
+  min-width: 80px;
+}

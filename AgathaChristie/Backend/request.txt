@@ -1,0 +1,10 @@
+GET /listar-jugadores
+GET /listar-partidas
+PUT /iniciar-partida/{partida_id}
+POST /crear-partida?nombre=NOMBRE&creador=ID_CREADOR
+DELETE /eliminar-partida/{partida_id}
+PUT /unirse-partida?partida_id=PARTIDA_ID&jugador_id=JUGADOR_ID
+POST /crear-jugador?nombre=NOMBRE&cumple=CUMPLE(2003-12-29)&avatar=STRING_AVATAR
+PUT /salir-partida?jugador_id=JUGADOR_ID
+GET /detalles-partida?partida_id=PARTIDA_ID
+GET /partida/jugadores?partida_id=PARTIDA_ID

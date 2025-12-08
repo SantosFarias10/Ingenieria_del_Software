@@ -1,0 +1,97 @@
+.modal-robar-set-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-robar-set-panel {
+  background: rgba(35, 95, 62, 0.98);
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(218, 165, 32, 0.5);
+  border-radius: 12px;
+  max-width: 420px;
+  width: 90vw;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5), 0 0 30px rgba(218, 165, 32, 0.3);
+  padding: 1.5rem 1.2rem;
+  animation: modalFadeIn 0.2s;
+}
+
+@keyframes modalFadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.modal-robar-set-header {
+  border-bottom: 2px solid rgba(218, 165, 32, 0.4);
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+}
+
+.modal-robar-set-header h2,
+.modal-robar-set-header h3 {
+  color: #f5f5dc;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.modal-robar-set-content {
+  max-height: 320px;
+  overflow-y: auto;
+  margin-bottom: 1rem;
+}
+
+.modal-robar-set-jugador {
+  margin-bottom: 1.2rem;
+}
+
+.modal-robar-set-jugador h4,
+.modal-robar-set-jugador p {
+  color: #f5f5dc;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.modal-robar-set-item {
+  background: rgba(45, 126, 82, 0.6);
+  border: 1px solid rgba(218, 165, 32, 0.3);
+  border-radius: 6px;
+  padding: 0.4em 0.7em;
+  margin-bottom: 0.3em;
+  font-size: 1em;
+  color: #f5f5dc;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  transition: all 0.2s ease;
+}
+
+.modal-robar-set-item:hover {
+  background: rgba(45, 126, 82, 0.8);
+  border-color: rgba(218, 165, 32, 0.5);
+  transform: translateX(4px);
+}
+
+.modal-robar-set-footer {
+  text-align: right;
+}
+
+.modal-robar-set-footer button {
+  background: rgba(218, 165, 32, 0.9);
+  color: #1a1a1a;
+  border: none;
+  border-radius: 6px;
+  padding: 0.5em 1.2em;
+  font-size: 1em;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.modal-robar-set-footer button:hover {
+  background: rgba(218, 165, 32, 1);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(218, 165, 32, 0.4);
+}

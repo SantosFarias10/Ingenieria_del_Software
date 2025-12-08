@@ -1,0 +1,214 @@
+/* Contenedor de acciones del turno */
+/* === CONTENEDOR PRINCIPAL === */
+.acciones-turno {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  max-width: 200px;
+  z-index: calc(var(--z-dropdown) + 1);
+  animation: slideUp 0.3s ease-out;
+}
+
+.acciones-turno.disabled {
+  background: rgba(45, 126, 82, 0.5);
+}
+
+/* Esperando turno */
+.esperando-turno {
+  color: #f5f5dc;
+  margin: 0;
+  text-align: center;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Indicador de fases */
+.fase-indicador {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.fase {
+  flex: 1;
+  padding: 8px 12px;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(218, 165, 32, 0.2);
+  border-radius: 8px;
+  text-align: center;
+  color: rgba(245, 245, 220, 0.5);
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.fase.active {
+  background: rgba(218, 165, 32, 0.9);
+  border-color: rgba(218, 165, 32, 1);
+  color: #1a1a1a;
+  box-shadow: 0 4px 12px rgba(218, 165, 32, 0.4), 0 0 20px rgba(218, 165, 32, 0.3);
+  transform: scale(1.05);
+  text-shadow: none;
+}
+
+/* Botones de acciones */
+.acciones-botones {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.btn-accion {
+  position: relative;
+  padding: 14px 28px;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  flex: 1;
+  min-width: 160px;
+  max-width: 300px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+}
+
+.btn-accion::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, rgba(255, 255, 255, 0.1) 0%, transparent 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.btn-accion:hover:not(:disabled)::before {
+  opacity: 1;
+}
+
+.btn-accion:hover:not(:disabled) {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+}
+
+.btn-accion:active:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+.btn-accion:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  filter: grayscale(0.3);
+}
+
+/* Botón robar del mazo */
+.btn-robar-mazo {
+  background: rgba(76, 175, 80, 0.9);
+  border: 2px solid rgba(76, 175, 80, 1);
+  color: #fff;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.btn-robar-mazo:hover:not(:disabled) {
+  background: rgba(76, 175, 80, 1);
+  box-shadow: 0 8px 20px rgba(76, 175, 80, 0.4);
+}
+
+/* Botón terminar turno */
+.btn-terminar-turno {
+  background: rgba(218, 165, 32, 0.9);
+  border: 2px solid rgba(218, 165, 32, 1);
+  color: #1a1a1a;
+  text-shadow: none;
+  min-width: 200px;
+  font-weight: 700;
+}
+
+.btn-terminar-turno:hover:not(:disabled) {
+  background: rgba(218, 165, 32, 1);
+  box-shadow: 0 8px 20px rgba(218, 165, 32, 0.5);
+}
+
+/* Instrucción de fase */
+.instruccion-fase {
+  text-align: center;
+  padding: 12px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  border: 2px solid rgba(218, 165, 32, 0.4);
+}
+
+.instruccion-fase p {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #f5f5dc;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.botones-robar, .botones-finalizar {
+  display: contents;
+}
+
+/* Mensaje de espera */
+.mensaje-espera {
+  color: #f5f5dc;
+  margin: 0;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 12px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .acciones-turno {
+    padding: 12px 16px;
+  }
+
+  .fase-indicador {
+    margin-bottom: 12px;
+  }
+
+  .fase {
+    font-size: 0.75rem;
+    padding: 6px 8px;
+  }
+
+  .btn-accion {
+    font-size: 0.9rem;
+    padding: 12px 20px;
+    min-width: 140px;
+  }
+
+  .acciones-botones {
+    gap: 10px;
+  }
+}
+
+/* Animación de entrada */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

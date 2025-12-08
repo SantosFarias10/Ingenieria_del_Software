@@ -1,0 +1,182 @@
+.modal-cantidad-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+
+.modal-cantidad-panel {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  border: 2px solid #d4af37;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  padding: 24px;
+  max-width: 400px;
+  width: 90%;
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.modal-cantidad-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  border-bottom: 1px solid #d4af37;
+  padding-bottom: 12px;
+}
+
+.modal-cantidad-title {
+  margin: 0;
+  color: #d4af37;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  flex: 1;
+}
+
+.modal-cantidad-close {
+  background: none;
+  border: none;
+  color: #d4af37;
+  font-size: 28px;
+  cursor: pointer;
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.modal-cantidad-close:hover {
+  background-color: rgba(212, 175, 55, 0.1);
+}
+
+.modal-cantidad-content {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: center;
+}
+
+.modal-cantidad-rango {
+  color: #e0e0e0;
+  font-size: 14px;
+  margin: 0;
+  text-align: center;
+}
+
+.cantidad-selector {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(212, 175, 55, 0.05);
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  border-radius: 8px;
+}
+
+.btn-cantidad-control {
+  background: linear-gradient(135deg, #0f3460 0%, #16213e 100%);
+  border: 2px solid #d4af37;
+  color: #d4af37;
+  font-size: 24px;
+  font-weight: bold;
+  width: 48px;
+  height: 48px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-cantidad-control:hover:not(:disabled) {
+  background: linear-gradient(135deg, #16213e 0%, #0f3460 100%);
+  box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+}
+
+.btn-cantidad-control:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.cantidad-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 80px;
+}
+
+.cantidad-numero {
+  color: #d4af37;
+  font-size: 36px;
+  font-weight: bold;
+  line-height: 1;
+}
+
+.cantidad-label {
+  color: #a0a0a0;
+  font-size: 12px;
+  margin-top: 4px;
+  text-transform: uppercase;
+}
+
+.modal-cantidad-botones {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+}
+
+.btn-seleccionar,
+.btn-cancelar {
+  flex: 1;
+  padding: 12px;
+  border: 2px solid #d4af37;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-seleccionar {
+  background: linear-gradient(135deg, #d4af37 0%, #a8860d 100%);
+  color: #1a1a2e;
+}
+
+.btn-seleccionar:hover {
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+  transform: translateY(-2px);
+}
+
+.btn-cancelar {
+  background: linear-gradient(135deg, #0f3460 0%, #16213e 100%);
+  color: #d4af37;
+}
+
+.btn-cancelar:hover {
+  box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
+  transform: translateY(-2px);
+}

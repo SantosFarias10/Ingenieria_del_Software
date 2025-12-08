@@ -1,0 +1,58 @@
+.mazo-descarte-wrapper {
+  display: inline-block;
+  text-align: center;
+  margin: 10px;
+}
+
+.mazo-descarte {
+  position: relative;
+  display: inline-block;
+  cursor: default;
+}
+
+.carta-descarte {
+  position: relative;
+}
+
+.contador-descarte {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: rgba(0,0,0,0.8);
+  color: white;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  font-weight: bold;
+  z-index: 10;
+  border: 2px solid white;
+}
+
+.descarte-vacio {
+  width: 180px;
+  height: 252px;
+  background: #f0f0f0;
+  border: 2px dashed #ccc;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #999;
+}
+
+.descarte-vacio p {
+  font-style: italic;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.label-mazo {
+  margin-top: 8px;
+  font-size: 0.9rem;
+  color: #333;
+  font-weight: bold;
+}

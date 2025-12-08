@@ -1,0 +1,100 @@
+
+
+.mazo-regular-wrapper {
+  display: inline-block;
+  text-align: center;
+  margin: 10px;
+}
+
+.mazo-regular {
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-block;
+  position: relative;
+}
+
+/* Estados del mazo */
+.mazo-regular.activo {
+  cursor: pointer;
+}
+
+.mazo-regular.activo:hover {
+  transform: translateY(-5px) scale(1.05);
+  filter: brightness(1.1);
+}
+
+.mazo-regular.inactivo {
+  opacity: 0.6;
+  cursor: not-allowed;
+  filter: grayscale(0.5);
+}
+
+/* Contador de cartas sobre la carta */
+.mazo-regular .contador-cartas {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: white;
+  text-shadow: 
+    2px 2px 4px rgba(0,0,0,0.8),
+    -1px -1px 2px rgba(0,0,0,0.8),
+    1px -1px 2px rgba(0,0,0,0.8),
+    -1px 1px 2px rgba(0,0,0,0.8);
+  z-index: 5;
+  pointer-events: none;
+}
+
+/* Label del mazo */
+.label-mazo {
+  margin-top: 8px;
+  font-size: 0.9rem;
+  color: #333;
+  font-weight: bold;
+}
+
+/* Efectos de hover más pronunciados para estado activo */
+.mazo-regular.activo:hover {
+  box-shadow: 0 6px 12px rgba(212, 175, 55, 0.4);
+}
+
+/* Para el área de mazos en general */
+.mazos-area {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin: 20px 0;
+  padding: 15px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  flex-wrap: wrap;
+}
+
+/* Responsive para móviles */
+@media (max-width: 768px) {
+  .mazos-area {
+    gap: 20px;
+    padding: 10px;
+  }
+  
+  .mazo-regular .contador-cartas {
+    font-size: 2rem;
+  }
+  
+  .label-mazo {
+    font-size: 0.7rem;
+  }
+}
+
+/* Animación sutil cuando se roba una carta */
+@keyframes robarCarta {
+  0% { transform: scale(1); }
+  50% { transform: scale(0.95); }
+  100% { transform: scale(1); }
+}
+
+.mazo-regular.robando {
+  animation: robarCarta 0.3s ease;
+}

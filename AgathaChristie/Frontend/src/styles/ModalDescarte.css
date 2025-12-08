@@ -1,0 +1,181 @@
+/* Overlay del modal */
+.modal-descarte-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(4px);
+}
+
+/* Panel del modal */
+.modal-descarte-panel {
+  background: var(--gradient-background, linear-gradient(135deg, #38000A, #1a0003, #9B1313));
+  border-radius: 1rem;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  max-width: 90vw;
+  max-height: 90vh;
+  width: 700px;
+  display: flex;
+  flex-direction: column;
+  border: 2px solid var(--color-primary, #CD1C18);
+  overflow: hidden;
+}
+
+/* Header */
+.modal-descarte-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+  border-bottom: 2px solid var(--surface-border, rgba(255, 255, 255, 0.15));
+  background: var(--surface-primary, rgba(255, 255, 255, 0.05));
+}
+
+.modal-descarte-title {
+  margin: 0;
+  font-size: var(--font-size-2xl, 1.5rem);
+  font-weight: var(--font-weight-bold, 700);
+  color: var(--text-primary, #ffffff);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.modal-descarte-close {
+  background: transparent;
+  border: none;
+  font-size: 2rem;
+  color: var(--text-primary, #ffffff);
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+}
+
+.modal-descarte-close:hover {
+  background: var(--surface-hover, rgba(255, 255, 255, 0.12));
+  transform: rotate(90deg);
+}
+
+/* Content */
+.modal-descarte-content {
+  padding: 2rem;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.modal-descarte-cartas {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.modal-descarte-carta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  position: relative;
+}
+
+.modal-descarte-carta .carta {
+  width: 150px;
+  height: 210px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: default;
+}
+
+.modal-descarte-carta:hover .carta {
+  transform: translateY(-8px) scale(1.05);
+  box-shadow: 0 8px 20px var(--color-primary-alpha-strong, rgba(205, 28, 24, 0.8));
+}
+
+.modal-descarte-orden {
+  color: var(--color-primary-light, #FFA896);
+  font-size: var(--font-size-sm, 0.875rem);
+  font-weight: var(--font-weight-semibold, 600);
+  text-align: center;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+}
+
+.modal-descarte-vacio {
+  text-align: center;
+  color: var(--text-muted, rgba(255, 255, 255, 0.6));
+  font-size: var(--font-size-lg, 1.125rem);
+  padding: 3rem;
+}
+
+/* Footer */
+.modal-descarte-footer {
+  padding: 1.5rem;
+  border-top: 2px solid var(--surface-border, rgba(255, 255, 255, 0.15));
+  background: var(--surface-primary, rgba(255, 255, 255, 0.05));
+  display: flex;
+  justify-content: center;
+}
+
+.modal-descarte-btn-cerrar {
+  background: var(--gradient-primary, linear-gradient(135deg, #CD1C18, #9B1313));
+  color: var(--text-primary, #ffffff);
+  font-weight: var(--font-weight-bold, bold);
+  padding: 0.75rem 2rem;
+  border-radius: 0.5rem;
+  font-size: var(--font-size-base, 1rem);
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.modal-descarte-btn-cerrar:hover {
+  background: var(--gradient-dark, linear-gradient(135deg, #9B1313, #38000A));
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px var(--color-primary-alpha-strong, rgba(205, 28, 24, 0.8));
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .modal-descarte-panel {
+    width: 95vw;
+    max-height: 85vh;
+  }
+
+  .modal-descarte-title {
+    font-size: 1.25rem;
+  }
+
+  .modal-descarte-cartas {
+    gap: 1rem;
+  }
+
+  .modal-descarte-carta .carta {
+    width: 100px;
+    height: 140px;
+  }
+
+  .modal-descarte-content {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .modal-descarte-cartas {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .modal-descarte-carta .carta {
+    width: 120px;
+    height: 168px;
+  }
+}

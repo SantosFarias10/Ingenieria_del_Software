@@ -1,0 +1,74 @@
+.mazo-evento-wrapper {
+  display: inline-block;
+  text-align: center;
+  margin: 10px;
+}
+
+.mazo-evento {
+  position: relative;
+  display: inline-block;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.mazo-evento.clickeable {
+  cursor: pointer;
+}
+
+.mazo-evento.clickeable:hover {
+  transform: translateY(-8px);
+  filter: brightness(1.1);
+}
+
+.mazo-evento.clickeable:hover .carta-evento {
+  box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+}
+
+.carta-evento {
+  position: relative;
+}
+
+.evento-vacio {
+  width: 180px;
+  height: 252px;
+  background: rgba(0, 0, 0, 0.1);
+  border: 2px dashed rgba(255, 255, 255, 0.3);
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.5);
+  text-align: center;
+  padding: 3rem;
+}
+
+.evento-vacio p {
+  font-size: 0.75rem;
+  margin: 0;
+}
+
+.label-mazo {
+  margin-top: 8px;
+  font-size: 0.9rem;
+  color: #333;
+  font-weight: bold;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .mazo-evento {
+    width: 100px;
+    height: 140px;
+  }
+
+  .evento-icon {
+    font-size: 36px;
+  }
+
+  .evento-placeholder p {
+    font-size: 12px;
+  }
+
+  .label-mazo {
+    font-size: 12px;
+  }
+}

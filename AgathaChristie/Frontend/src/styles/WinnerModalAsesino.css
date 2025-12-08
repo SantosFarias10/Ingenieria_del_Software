@@ -1,0 +1,46 @@
+.winner-modal-asesino {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(35, 95, 62, 0.98);
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(218, 165, 32, 0.5);
+  border-radius: 1rem;
+  padding: 1.2rem 2rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 30px rgba(218, 165, 32, 0.3);
+  min-width: 220px;
+}
+.winner-modal-asesino-avatar {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid rgba(231, 76, 60, 0.9);
+  box-shadow: 0 0 15px rgba(231, 76, 60, 0.5);
+  margin-bottom: 12px;
+}
+.winner-modal-asesino-nombre {
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: #ff6b6b;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  margin-bottom: 4px;
+}
+.winner-modal-asesino-label {
+  font-size: 0.95rem;
+  color: #e0e0d0;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+.winner-modal-asesino-resultado {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #f5f5dc;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  margin-bottom: 0.5rem;
+}
+.winner-modal-asesino-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}

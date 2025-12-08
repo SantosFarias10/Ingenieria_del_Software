@@ -1,0 +1,136 @@
+/* Botón para extender set en PlayerSets */
+.set-label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.btn-extender-set {
+    background: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    padding: 0;
+    line-height: 1;
+}
+
+.btn-extender-set:hover {
+    background: #45a049;
+    transform: scale(1.1);
+}
+
+.btn-extender-set:active {
+    transform: scale(0.95);
+}
+
+.btn-extender-set:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+/* Modal para agregar detective */
+.modal-agregar-detective {
+    padding: 20px;
+    max-width: 800px;
+}
+
+.modal-agregar-detective h2 {
+    margin: 0 0 16px 0;
+    color: #333;
+    font-size: 24px;
+}
+
+.instrucciones {
+    margin: 12px 0;
+    color: #666;
+    font-size: 14px;
+}
+
+.no-cartas-disponibles {
+    text-align: center;
+    padding: 40px 20px;
+    background: #f5f5f5;
+    border-radius: 8px;
+    margin: 20px 0;
+}
+
+.no-cartas-disponibles p {
+    margin: 12px 0;
+    color: #666;
+}
+
+.no-cartas-disponibles .hint {
+    font-size: 13px;
+    color: #999;
+    font-style: italic;
+}
+
+.cartas-disponibles {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: center;
+    margin: 20px 0;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.carta-disponible {
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    position: relative;
+}
+
+.carta-disponible:hover {
+    transform: translateY(-8px);
+}
+
+.carta-disponible:hover::after {
+    content: 'Click para seleccionar';
+    position: absolute;
+    bottom: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    white-space: nowrap;
+    pointer-events: none;
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px solid #eee;
+}
+
+.btn-cancelar {
+    padding: 8px 20px;
+    background: #f44336;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.2s ease;
+}
+
+.btn-cancelar:hover {
+    background: #d32f2f;
+}

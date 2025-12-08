@@ -1,0 +1,279 @@
+/* ===== MODAL SETS - LAYOUT EN FILAS ===== */
+
+/* Overlay del modal */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Contenedor del modal */
+.modal-content {
+    background: rgba(35, 95, 62, 0.98);
+    backdrop-filter: blur(10px);
+    padding: 2rem;
+    border-radius: 12px;
+    border: 2px solid rgba(218, 165, 32, 0.5);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5), 0 0 30px rgba(218, 165, 32, 0.3);
+    max-width: 900px;
+    width: 95%;
+    max-height: 90vh;
+    overflow-y: auto;
+    animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Título y descripción */
+.modal-content h2 {
+    margin: 0 0 1rem 0;
+    font-size: 1.8rem;
+    color: #f5f5dc;
+    text-align: center;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.modal-content p {
+    text-align: center;
+    font-size: 1.1rem;
+    color: #e0e0d0;
+    margin-bottom: 1.5rem;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+/* GRID DE SETS - LAYOUT EN FILAS */
+.cartas-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 16px;
+    margin-bottom: 2rem;
+    max-height: 60vh;
+    overflow-y: auto;
+    padding: 1rem;
+}
+
+/* Cada set es una fila */
+.set-row {
+    background: rgba(45, 126, 82, 0.6);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    padding: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+}
+
+.set-row:hover {
+    background: rgba(45, 126, 82, 0.8);
+    border-color: rgba(218, 165, 32, 0.6);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.set-row.seleccionada {
+    border-color: rgba(218, 165, 32, 0.9);
+    background: rgba(45, 126, 82, 0.9);
+    box-shadow: 0 0 0 2px rgba(218, 165, 32, 0.5), 0 0 20px rgba(218, 165, 32, 0.3);
+    transform: translateY(-4px);
+}
+
+/* Cartas dentro de cada set - fila horizontal */
+.set-cards-row {
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    margin-bottom: 12px;
+}
+
+/* Wrapper de cada carta */
+.card-wrapper {
+    width: 120px;
+    flex: 0 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Información del set */
+.set-info {
+    text-align: center;
+    font-weight: 600;
+    color: #f5f5dc;
+    font-size: 0.9rem;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.set-basic-info {
+    margin-bottom: 4px;
+}
+
+.set-validation-info {
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.validation-success {
+    color: #4CAF50;
+}
+
+.validation-error {
+    color: #f44336;
+}
+
+/* Información del set seleccionado */
+.selected-set-info {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(218, 165, 32, 0.4);
+    border-radius: 8px;
+    padding: 12px;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.selected-set-valid {
+    color: #76ff7a;
+    font-weight: 600;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.selected-set-invalid {
+    color: #ff6b6b;
+    font-weight: 600;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+
+
+/* Botones del modal */
+.modal-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.modal-buttons button {
+    padding: 0.75rem 2rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-weight: 600;
+}
+
+.modal-buttons button:first-child {
+    background-color: #f44336;
+    color: white;
+}
+
+.modal-buttons button:first-child:hover {
+    background-color: #d32f2f;
+    transform: scale(1.05);
+}
+
+.modal-buttons button:last-child {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.modal-buttons button:last-child:hover:not(:disabled) {
+    background-color: #45a049;
+    transform: scale(1.05);
+}
+
+.modal-buttons button:disabled {
+    background-color: #cccccc;
+    color: #666666;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.modal-buttons button.loading {
+    background-color: #FF9800;
+    cursor: wait;
+}
+
+.modal-buttons button.loading:hover {
+    background-color: #F57C00;
+    transform: none;
+}
+
+/* Estilos para sets inválidos */
+.set-row.invalid {
+    border-color: rgba(244, 67, 54, 0.7);
+    background: rgba(45, 126, 82, 0.4);
+    opacity: 0.7;
+}
+
+.set-row.invalid:hover {
+    background: rgba(45, 126, 82, 0.5);
+    border-color: rgba(244, 67, 54, 0.8);
+}
+
+/* Scrollbar personalizada */
+.cartas-grid::-webkit-scrollbar {
+    width: 8px;
+}
+
+.cartas-grid::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+}
+
+.cartas-grid::-webkit-scrollbar-thumb {
+    background: rgba(218, 165, 32, 0.6);
+    border-radius: 4px;
+}
+
+.cartas-grid::-webkit-scrollbar-thumb:hover {
+    background: rgba(218, 165, 32, 0.8);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .modal-content {
+        padding: 1rem;
+        max-width: 95%;
+        margin: 1rem;
+    }
+
+    .card-wrapper { 
+        width: 100px; 
+    }
+
+    .set-cards-row {
+        justify-content: center;
+    }
+
+    .modal-content h2 {
+        font-size: 1.4rem;
+    }
+
+    .modal-buttons button {
+        padding: 0.6rem 1.5rem;
+        font-size: 0.9rem;
+    }
+}
